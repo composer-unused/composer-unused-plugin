@@ -1,0 +1,30 @@
+{
+    "name": "composer-unused/composer-unused-plugin",
+    "description": "Composer plugin for composer-unused",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ComposerUnused\\ComposerUnusedPlugin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andreas Frömer",
+            "email": "composer-unused@icanhazstring.net"
+        }
+    ],
+    "extra": {
+        "class": "ComposerUnused\\ComposerUnusedPlugin\\UnusedPlugin"
+    },
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "composer-plugin-api": "^2.0",
+        "icanhazstring/composer-unused": "dev-main",
+        "composer-unused/symbol-parser": "dev-main",
+        "composer-unused/contracts": "dev-main"
+    },
+    "require-dev": {
+        "composer/composer": "^2.2"
+    }
+}

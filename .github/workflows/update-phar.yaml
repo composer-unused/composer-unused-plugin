@@ -1,0 +1,20 @@
+name: Update composer-unused.phar
+on:
+  repository_dispatch:
+    types: [update-plugin]
+jobs:
+  myEvent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Download latest phar
+        run: curl -JOL https://github.com/composer-unused/composer-unused/releases/download/${{ github.event.client_payload.tag }}/composer-unused.phar
+
+      - name: Commit new phar and create release
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit-message: Update .phar to version ${{ github.event.client_payload.tag }}
+          file_pattern: *.phar
+          tagging_message: ${{ github.event.client_payload.tag }}
