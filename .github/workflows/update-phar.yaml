@@ -10,7 +10,7 @@ jobs:
         uses: "actions/checkout@v2"
 
       - name: "Download latest phar"
-        run: "curl -JOL https://github.com/composer-unused/composer-unused/releases/download/${{ github.event.client_payload.tag }}/composer-unused.phar"
+        run: "curl -OL https://github.com/composer-unused/composer-unused/releases/download/${{ github.event.client_payload.tag }}/composer-unused.phar"
 
       - name: "Commit new phar and create release"
         uses: "stefanzweifel/git-auto-commit-action@v4"
