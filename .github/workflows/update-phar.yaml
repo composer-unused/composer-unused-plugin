@@ -16,5 +16,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit-message: Update .phar to version ${{ github.event.client_payload.tag }}
-          file_pattern: *.phar
+          file_pattern: "*.phar"
           tagging_message: ${{ github.event.client_payload.tag }}
