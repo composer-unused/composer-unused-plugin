@@ -15,31 +15,24 @@ jobs:
       - name: "Commit new phar"
         uses: "stefanzweifel/git-auto-commit-action@v4"
         with:
-          commit-message: "Update .phar to version ${{ github.event.client_payload.tag }}"
+          commit_message: "Update .phar to version ${{ github.event.client_payload.tag }}"
           file_pattern: "*.phar"
-          
-      - name: "Determine release body"
+
+      - name: "Create release"
         uses: "actions/github-script@v5"
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
-            const repository = context.repo
-            const response = await github.rest.repos.generateReleaseNotes({
-              owner: repository.owner,
-              repo: repository.repo,
-              tag_name: "${{ github.event.client_payload.tag }}",
-            });
-            core.exportVariable("RELEASE_BODY", response.data.body);
-
-      - name: "Create release"
-        uses: "actions/create-release@v1.1.4"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        with:
-          body: "${{ env.RELEASE_BODY }}"
-          draft: false
-          prerelease: false
-          release_name: "${{ github.event.client_payload.tag }}"
-          tag_name: ${{ github.event.client_payload.tag }}"
-
-      
+            try {
+              await github.rest.repos.createRelease({
+                draft: false,
+                generate_release_notes: true,
+                name: "${{ github.event.client_payload.tag }}",
+                owner: context.repo.owner,
+                prerelease: false,
+                repo: context.repo.repo,
+                tag_name: "${{ github.event.client_payload.tag }}"
+              });
+            } catch (error) {
+              core.setFailed(error.message);
+            }
