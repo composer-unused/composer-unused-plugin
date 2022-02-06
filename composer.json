@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "ComposerUnused\\ComposerUnusedPlugin\\": "src/"
-        }
+        },
+        "files": [
+            "bootstrap.php"
+        ]
     },
     "authors": [
         {

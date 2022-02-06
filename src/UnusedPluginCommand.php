@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ComposerUnused\ComposerUnusedPlugin;
 
 use Composer\Command\BaseCommand;
-use ComposerUnused\ComposerUnused\Console\Command\UnusedCommand;
+use _ComposerUnused_\ComposerUnused\ComposerUnused\Console\Command\UnusedCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;

@@ -9,12 +9,11 @@ use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Plugin;
 use Exception;
-use ComposerUnused\ComposerUnused\Console\Command\UnusedCommand;
-use ComposerUnused\ComposerUnused\Di\ServiceContainer;
+use _ComposerUnused_\ComposerUnused\ComposerUnused\Console\Command\UnusedCommand;
+use Phar;
 
 final class UnusedPlugin implements Plugin\PluginInterface, Plugin\Capable, Plugin\Capability\CommandProvider
 {
-    /** @var ServiceContainer */
     private $container;
 
     /**
@@ -33,7 +32,8 @@ final class UnusedPlugin implements Plugin\PluginInterface, Plugin\Capable, Plug
     public function activate(Composer $composer, IOInterface $io): void
     {
         $pharPath = __DIR__ . '/../composer-unused.phar';
-        $this->container = require 'phar://'. $pharPath .'/config/container.php';
+        Phar::loadPhar($pharPath, 'composer-unused.phar');
+        $this->container = require 'phar://composer-unused.phar/config/container.php';
     }
 
     public function deactivate(Composer $composer, IOInterface $io): void
