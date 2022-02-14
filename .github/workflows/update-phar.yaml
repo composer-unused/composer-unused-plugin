@@ -12,6 +12,15 @@ jobs:
       - name: "Download latest phar"
         run: "curl -OL https://github.com/composer-unused/composer-unused/releases/download/${{ github.event.client_payload.tag }}/composer-unused.phar"
 
+      - name: "Update require version in composer.json"
+        uses: sergeysova/jq-action@v2
+        id: version
+        with:
+          cmd: jq '.require."icanhazstring/composer-unused" = "^{{ github.event.client_payload.tag }}""' composer.json
+
+      - name: "Replace composer.json content"
+        run: echo -E "${{ steps.version.outputs.value }}" > composer.json
+
       - name: "Commit new phar"
         uses: "stefanzweifel/git-auto-commit-action@v4"
         with:
