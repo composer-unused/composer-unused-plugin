@@ -17,6 +17,7 @@ jobs:
         id: version
         with:
           cmd: jq '.require."icanhazstring/composer-unused" = "^{{ github.event.client_payload.tag }}"' composer.json
+          multiline: true
 
       - name: "Replace composer.json content"
         run: echo -E "${{ steps.version.outputs.value }}" > composer.json
