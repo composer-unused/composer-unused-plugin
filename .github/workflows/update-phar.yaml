@@ -16,7 +16,7 @@ jobs:
         uses: sergeysova/jq-action@v2
         id: version
         with:
-          cmd: jq '.require."icanhazstring/composer-unused" = "^{{ github.event.client_payload.tag }}""' composer.json
+          cmd: jq '.require."icanhazstring/composer-unused" = "^{{ github.event.client_payload.tag }}"' composer.json
 
       - name: "Replace composer.json content"
         run: echo -E "${{ steps.version.outputs.value }}" > composer.json
@@ -24,8 +24,8 @@ jobs:
       - name: "Commit new phar"
         uses: "stefanzweifel/git-auto-commit-action@v4"
         with:
-          commit_message: "Update .phar to version ${{ github.event.client_payload.tag }}"
-          file_pattern: "*.phar"
+          commit_message: "Update composer-unused to version ${{ github.event.client_payload.tag }}"
+          file_pattern: "*.*"
 
       - name: "Create release"
         uses: "actions/github-script@v6"
