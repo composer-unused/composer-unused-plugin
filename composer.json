@@ -23,6 +23,6 @@
         "icanhazstring/composer-unused": "^0.8.2"
     },
     "require-dev": {
-        "composer/composer": "^2.2"
+        "composer/composer": "^2.4"
     }
 }
