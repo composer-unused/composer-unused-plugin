@@ -16,7 +16,7 @@ jobs:
         uses: sergeysova/jq-action@v2
         id: version
         with:
-          cmd: jq '.require."icanhazstring/composer-unused" = "^{{ github.event.client_payload.tag }}"' composer.json
+          cmd: jq '.require."icanhazstring/composer-unused" = "^${{ github.event.client_payload.tag }}"' composer.json
           multiline: true
 
       - name: "Replace composer.json content"
