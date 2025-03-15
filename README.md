@@ -1,3 +1,5 @@
+ℹ️ **READ-ONLY** Please use [composer-unused](https://github.com/composer-unused/composer-unused)
+
 # composer-unused/composer-unused-plugin
 Composer plugin for [composer-unused](https://github.com/composer-unused/composer-unused).
 
